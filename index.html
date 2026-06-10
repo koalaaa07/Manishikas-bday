@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, My Favorite Fox 🦊</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts for elegant serif & handwriting -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Caveat:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --color-cream: #fdfbf7;
+      --color-beige: #f5ede0;
+      --color-peach: #f3c6af;
+      --color-rose: #e2a89b;
+      --color-gold: #dfb15b;
+      --color-candlelight: #ffebc2;
+      --color-dark-espresso: #160d0c;
+      --color-dark-warm: #231513;
+    }
+
+    body {
+      background-color: var(--color-dark-espresso);
+      color: var(--color-cream);
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+    }
+
+    .font-handwritten {
+      font-family: 'Caveat', cursive;
+    }
+
+    .font-serif-title {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Soft ambient candlelight glow */
+    .candlelight-glow {
+      box-shadow: 0 0 50px 10px rgba(255, 235, 194, 0.08);
+    }
+
+    /* Custom scrollbar matching aesthetic */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--color-dark-espresso);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--color-rose);
+      border-radius: 10px;
+    }
+
+    /* Scrapbook polaroid framing with tape */
+    .polaroid {
+      background: #fbf9f4;
+      padding: 12px 12px 24px 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 0 40px rgba(0,0,0,0.02);
+      border: 1px solid rgba(255,255,255,0.1);
+      transform: rotate(var(--rotation, 2deg));
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .polaroid:hover {
+      transform: rotate(0deg) scale(1.05);
+      box-shadow: 0 15px 35px rgba(226, 168, 155, 0.25);
+    }
+
+    .washi-tape {
+      background: rgba(226, 168, 155, 0.35);
+      backdrop-filter: blur(1px);
+      width: 90px;
+      height: 24px;
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-3deg);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      border-left: 2px dashed rgba(255,255,255,0.2);
+      border-right: 2px dashed rgba(255,255,255,0.2);
+    }
+
+    /* Screen Transitions */
+    .screen-fade {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: scale(0.98);
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    .screen-fade.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
+      position: relative;
+    }
+
+    /* Subtle slow floating animations */
+    @keyframes slow-float {
+      0%, 100% { transform: translateY(0px) rotate(var(--rotation, 2deg)); }
+      50% { transform: translateY(-10px) rotate(calc(var(--rotation, 2deg) - 1deg)); }
+    }
+    .floating-card {
+      animation: slow-float 6s ease-in-out infinite;
+    }
+
+    @keyframes gentle-pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.65; }
+    }
+    .glowing-lantern {
+      animation: gentle-pulse 4s ease-in-out infinite;
+    }
+
+    /* Dotted line / scrapbook element styling */
+    .scrapbook-border {
+      border: 1px dashed rgba(226, 168, 155, 0.3);
+    }
+
+    /* Hidden messages hover tags */
+    .hidden-tag {
+      transition: all 0.4s ease;
+    }
+    .hidden-tag:hover .tag-content {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  </style>
+</head>
+<body class="relative min-h-screen overflow-x-hidden selection:bg-rose-900/40">
+
+  <!-- Canvas for Fireflies & Cosmic Dust -->
+  <canvas id="fireflies-canvas" class="absolute inset-0 pointer-events-none z-0"></canvas>
+
+  <!-- Decorative Corner Ivy & Sketches -->
+  <div class="fixed top-4 left-4 z-40 opacity-30 pointer-events-none hidden md:block">
+    <!-- Cozy leaf/vine line-art -->
+    <svg width="120" height="120" viewBox="0 0 100 100" fill="none" stroke="#e2a89b" stroke-width="1.2" stroke-linecap="round">
+      <path d="M10,10 Q30,12 45,25 Q60,38 50,60" />
+      <path d="M45,25 Q48,15 40,10 C35,15 38,22 45,25 Z" fill="#e2a89b" fill-opacity="0.1"/>
+      <path d="M30,12 Q20,5 15,10 C15,18 22,15 30,12 Z" fill="#e2a89b" fill-opacity="0.1" />
+      <path d="M50,45 Q65,40 60,30 C50,30 50,40 50,45 Z" fill="#e2a89b" fill-opacity="0.1" />
+      <path d="M50,60 Q40,75 30,70 C30,60 45,60 50,60 Z" fill="#e2a89b" fill-opacity="0.1" />
+    </svg>
+  </div>
+
+  <div class="fixed bottom-4 left-4 z-40 opacity-35 pointer-events-none text-xs text-[#e2a89b]/40 font-handwritten select-none">
+    made with love by your koala 🐨
+  </div>
+
+  <!-- MAIN SCENARIO CONTAINER -->
+  <main class="relative z-10 w-full max-w-6xl mx-auto px-4 py-8 flex flex-col justify-center min-h-screen">
+
+    <!-- ========================================== -->
+    <!-- SCREEN 1: INTRO (Cozy Night & Silhouette) -->
+    <!-- ========================================== -->
+    <section id="screen-intro" class="screen-fade active flex flex-col items-center justify-center text-center">
+      
+      <!-- Center illustration -->
+      <div class="relative w-72 h-72 md:w-96 md:h-96 mx-auto mb-6 flex justify-center items-center">
+        <!-- Golden moon glow background -->
+        <div class="absolute w-48 h-48 md:w-64 md:h-64 bg-amber-500/10 rounded-full blur-3xl candlelight-glow z-0"></div>
+        
+        <!-- Hanging Lantern Left -->
+        <div class="absolute left-6 top-0 w-8 h-24 flex flex-col items-center z-10 origin-top animate-[slow-float_8s_ease-in-out_infinite]">
+          <div class="w-[1px] h-12 bg-[#e2a89b]/40"></div>
+          <div class="w-4 h-4 rounded-full border border-[#dfb15b]/50 bg-[#ffebc2]/30 glowing-lantern flex items-center justify-center">
+            <div class="w-1.5 h-1.5 rounded-full bg-[#ffebc2]"></div>
+          </div>
+        </div>
+
+        <!-- Hanging Lantern Right -->
+        <div class="absolute right-12 top-4 w-8 h-20 flex flex-col items-center z-10 origin-top animate-[slow-float_6s_ease-in-out_infinite]">
+          <div class="w-[1px] h-8 bg-[#e2a89b]/40"></div>
+          <div class="w-3 h-3 rounded-full border border-[#dfb15b]/50 bg-[#ffebc2]/20 glowing-lantern flex items-center justify-center">
+            <div class="w-1 h-1 rounded-full bg-[#ffebc2]"></div>
+          </div>
+        </div>
+
+        <!-- Sleek artistic Fox and Koala central SVG -->
+        <svg class="relative z-20 w-full h-full drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)]" viewBox="0 0 400 400" fill="none">
+          <defs>
+            <!-- Cozy gradient for night sky background within the frame -->
+            <radialGradient id="skyGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#36211c"/>
+              <stop offset="100%" stop-color="#160d0c"/>
+            </radialGradient>
+            <!-- Glowing gradient for moon -->
+            <linearGradient id="moonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ffebc2"/>
+              <stop offset="100%" stop-color="#dfb15b"/>
+            </linearGradient>
+            <!-- Soft fox gradient -->
+            <linearGradient id="foxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f3c6af"/>
+              <stop offset="100%" stop-color="#e2a89b"/>
+            </linearGradient>
+            <!-- Soft koala gradient -->
+            <linearGradient id="koalaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#d9cbd8"/>
+              <stop offset="100%" stop-color="#9d8f9c"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Starry starry frame circle with sketchy border -->
+          <circle cx="200" cy="190" r="135" fill="url(#skyGrad)" stroke="#e2a89b" stroke-width="1.5" stroke-dasharray="2 3" opacity="0.8"/>
+
+          <!-- Warm romantic giant moon in upper-right of frame -->
+          <path d="M 230 110 A 55 55 0 1 0 310 170 A 45 45 0 1 1 230 110 Z" fill="url(#moonGrad)" filter="drop-shadow(0 0 12px rgba(255, 235, 194, 0.4))" />
+
+          <!-- Tiny stars hanging in night sky -->
+          <g fill="#ffebc2" opacity="0.7">
+            <!-- Sparkles -->
+            <path d="M120,110 L122,114 L126,115 L122,116 L120,120 L118,116 L114,115 L118,114 Z"/>
+            <path d="M160,85 L161,88 L164,89 L161,90 L160,93 L159,90 L156,89 L159,88 Z" opacity="0.5"/>
+            <circle cx="280" cy="220" r="1.5"/>
+            <circle cx="110" cy="160" r="2" opacity="0.4"/>
+            <circle cx="150" cy="140" r="1"/>
+            <circle cx="190" cy="95" r="1.5"/>
+          </g>
+
+          <!-- Branch they are sitting on -->
+          <path d="M 85 285 Q 200 270 315 285 Q 200 280 85 285" fill="none" stroke="#4e3629" stroke-width="8" stroke-linecap="round"/>
+          <path d="M 120 280 Q 140 300 130 305 Q 125 295 120 280" fill="#4e3629" opacity="0.8"/> <!-- Small twig -->
+          
+          <!-- Forest Pine Silhouette in lower background -->
+          <path d="M 85 280 L 110 240 L 98 240 L 115 210 L 105 210 L 120 185 L 135 210 L 125 210 L 142 240 L 130 240 Z" fill="#1d1211" opacity="0.6"/>
+
+          <!-- THE KOALA (Left) -->
+          <g transform="translate(145, 195)">
+            <!-- Fluffy Ears -->
+            <circle cx="10" cy="15" r="18" fill="url(#koalaGrad)" stroke="#160d0c" stroke-width="1.5"/>
+            <circle cx="10" cy="15" r="10" fill="#f5ede0"/>
+            <circle cx="50" cy="15" r="18" fill="url(#koalaGrad)" stroke="#160d0c" stroke-width="1.5"/>
+            <circle cx="50" cy="15" r="10" fill="#f5ede0"/>
+            
+            <!-- Body/Back -->
+            <ellipse cx="30" cy="55" rx="25" ry="28" fill="url(#koalaGrad)" stroke="#160d0c" stroke-width="1.5"/>
+            <!-- Cute belly patch -->
+            <ellipse cx="30" cy="55" rx="14" ry="18" fill="#fdfbf7" opacity="0.9"/>
+            
+            <!-- Head -->
+            <circle cx="30" cy="32" r="22" fill="url(#koalaGrad)" stroke="#160d0c" stroke-width="1.5"/>
+            
+            <!-- Slepy Eyes -->
+            <path d="M 18 32 Q 22 35 25 32" fill="none" stroke="#160d0c" stroke-width="2" stroke-linecap="round"/>
+            <path d="M 35 32 Q 38 35 42 32" fill="none" stroke="#160d0c" stroke-width="2" stroke-linecap="round"/>
+            
+            <!-- Nose (signature big oval koala nose) -->
+            <ellipse cx="30" cy="38" rx="5" ry="9" fill="#2c1a18"/>
+            
+            <!-- Cute pink blush -->
+            <ellipse cx="14" cy="39" rx="3" ry="1.5" fill="#e2a89b" opacity="0.8"/>
+            <ellipse cx="46" cy="39" rx="3" ry="1.5" fill="#e2a89b" opacity="0.8"/>
+
+            <!-- Arms hug cuddle position -->
+            <path d="M 12 55 Q 22 48 30 55" fill="none" stroke="#9d8f9c" stroke-width="5" stroke-linecap="round"/>
+          </g>
+
+          <!-- THE FOX (Right) -->
+          <g transform="translate(205, 185)">
+            <!-- Bushy Tail wrapped forward under her -->
+            <path d="M 50 68 Q 75 75 80 50 Q 82 25 55 50 Q 40 64 50 68" fill="url(#foxGrad)" stroke="#160d0c" stroke-width="1.5"/>
+            <!-- White tip of tail -->
+            <path d="M 80 50 Q 82 25 55 50 Q 64 47 74 44 Z" fill="#fdfbf7"/>
+
+            <!-- Fox Body -->
+            <path d="M 15 78 Q 8 50 22 35 Q 36 50 29 78 Z" fill="url(#foxGrad)" stroke="#160d0c" stroke-width="1.5"/>
+            <!-- White chest patch -->
+            <path d="M 18 42 Q 22 55 22 68 Q 25 55 26 42 Z" fill="#fdfbf7" opacity="0.95"/>
+
+            <!-- Head -->
+            <polygon points="5,32 39,32 22,50" fill="url(#foxGrad)" stroke="#160d0c" stroke-width="1.5"/>
+            <!-- White cheek patches -->
+            <polygon points="5,32 15,32 10,41" fill="#fdfbf7"/>
+            <polygon points="39,32 29,32 34,41" fill="#fdfbf7"/>
+            
+            <!-- Ears -->
+            <polygon points="6,32 3,12 16,24" fill="url(#foxGrad)" stroke="#160d0c" stroke-width="1.5"/>
+            <polygon points="9,28 6,16 14,24" fill="#e2a89b"/> <!-- Inner ear -->
+            <polygon points="38,32 41,12 28,24" fill="url(#foxGrad)" stroke="#160d0c" stroke-width="1.5"/>
+            <polygon points="35,28 38,16 30,24" fill="#e2a89b"/> <!-- Inner ear -->
+
+            <!-- Happy Closed Eyes -->
+            <path d="M 10 37 Q 14 34 16 38" fill="none" stroke="#160d0c" stroke-width="2" stroke-linecap="round"/>
+            <path d="M 28 37 Q 30 34 34 38" fill="none" stroke="#160d0c" stroke-width="2" stroke-linecap="round"/>
+            
+            <!-- Cute tiny nose -->
+            <circle cx="22" cy="46" r="2" fill="#160d0c"/>
+            
+            <!-- Cute pink blush -->
+            <ellipse cx="9" cy="41" rx="2.5" ry="1.2" fill="#e2a89b" opacity="0.9"/>
+            <ellipse cx="35" cy="41" rx="2.5" ry="1.2" fill="#e2a89b" opacity="0.9"/>
+          </g>
+
+          <!-- Little warm light dust floating right out of the illustration -->
+          <circle cx="205" cy="180" r="3" fill="#ffebc2" opacity="0.7"/>
+          <circle cx="130" cy="260" r="2" fill="#ffebc2" opacity="0.5"/>
+        </svg>
+
+        <!-- Hanging branch leaves hanging over the artwork -->
+        <div class="absolute inset-0 pointer-events-none z-30">
+          <svg class="w-full h-full" viewBox="0 0 400 400" fill="none">
+            <path d="M 280 40 Q 230 60 190 45" stroke="#4e3629" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+            <!-- Leaf 1 -->
+            <path d="M 230 52 Q 220 62 225 70 C 235 68 238 58 230 52 Z" fill="#e2a89b" opacity="0.5" />
+            <!-- Leaf 2 -->
+            <path d="M 210 48 Q 205 55 210 60 C 215 58 215 52 210 48 Z" fill="#dfb15b" opacity="0.4" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- Main Typography block -->
+      <div class="max-w-xl space-y-4 px-4 z-20">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl tracking-wide font-serif-title font-light text-[#ffebc2] leading-tight">
+          Happy Birthday, Baby.
+        </h1>
+        <p class="font-handwritten text-xl md:text-2xl text-[#e2a89b] tracking-wide">
+          from your koala to the cutest fox
+        </p>
+
+        <!-- Soft Enter Button -->
+        <div class="pt-6">
+          <button onclick="transitionTo('screen-dialogue')" class="group relative inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-[#2a1b18] to-[#3a2622] hover:from-[#3a2622] hover:to-[#4e322d] text-[#ffebc2] rounded-full border border-[#e2a89b]/40 shadow-lg tracking-widest text-sm uppercase transition-all duration-500 hover:shadow-[0_0_25px_rgba(255,235,194,0.15)] overflow-hidden">
+            <!-- Shimmer effect inside button -->
+            <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]"></span>
+            <span class="relative">enter</span>
+            <span class="relative text-base transform group-hover:translate-x-1.5 transition-transform duration-300">💌</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SCREEN 2: PLAYFUL DIALOGUE (Yes / No)     -->
+    <!-- ========================================== -->
+    <section id="screen-dialogue" class="screen-fade flex flex-col items-center justify-center text-center">
+      
+      <!-- Polaroids scattered beautifully on sides for tablet+ desktop views -->
+      <div class="absolute left-[-40px] top-[10%] w-52 h-64 hidden lg:block floating-card z-10" style="--rotation: -5deg;">
+        <div class="washi-tape"></div>
+        <div class="polaroid rounded-sm">
+          <div class="w-full h-44 bg-[#f1ebd9] flex items-center justify-center border border-black/5 overflow-hidden">
+            <!-- Line-art sketch Coffee + Heart -->
+            <svg width="80" height="80" viewBox="0 0 100 100" stroke="#4e3629" stroke-width="1.5" fill="none" stroke-linecap="round">
+              <path d="M30,40 H60 Q70,40 70,55 Q70,70 60,70 H30 Q20,70 20,55 Q20,40 30,40 Z"/>
+              <path d="M60,45 H70 Q78,45 78,52.5 Q78,60 70,60 H60"/>
+              <path d="M15,80 H85"/>
+              <path d="M45,20 Q48,15 48,25 Q48,35 45,30"/>
+              <path d="M52,23 Q55,18 55,28 Q55,38 52,33"/>
+              <!-- Heart bubble -->
+              <path d="M45,55 C45,55 42,50 38,52 C34,54 36,60 45,64 C54,60 56,54 52,52 C48,50 45,55 45,55 Z" fill="#e2a89b" stroke="none" opacity="0.8"/>
+            </svg>
+          </div>
+          <p class="font-handwritten text-[#4e3629] text-center text-lg mt-3">from spreadsheets to stories</p>
+        </div>
+      </div>
+
+      <div class="absolute right-[-40px] bottom-[15%] w-52 h-64 hidden lg:block floating-card z-10" style="--rotation: 4deg;">
+        <div class="washi-tape" style="transform: translateX(-50%) rotate(4deg);"></div>
+        <div class="polaroid rounded-sm">
+          <div class="w-full h-44 bg-[#e9e1d1] flex items-center justify-center border border-black/5 overflow-hidden">
+            <!-- Constellation starry sketch -->
+            <svg width="80" height="80" viewBox="0 0 100 100" stroke="#4e3629" stroke-width="1.2" fill="none" stroke-linecap="round">
+              <circle cx="20" cy="30" r="2" fill="#4e3629"/>
+              <circle cx="50" cy="15" r="2.5" fill="#4e3629"/>
+              <circle cx="80" cy="35" r="2" fill="#4e3629"/>
+              <circle cx="45" cy="55" r="3" fill="#4e3629"/>
+              <circle cx="65" cy="75" r="2" fill="#4e3629"/>
+              <path d="M20,30 L50,15 L80,35 L45,55 L20,30 M45,55 L65,75" stroke-dasharray="3 3"/>
+              <path d="M15,15 Q17,20 22,22 M80,15 Q83,21 82,24" stroke="#dfb15b" stroke-width="1"/>
+            </svg>
+          </div>
+          <p class="font-handwritten text-[#4e3629] text-center text-lg mt-3">built on bad jokes & excel sheets</p>
+        </div>
+      </div>
+
+      <!-- Dialogue Scrapbook Box -->
+      <div class="w-full max-w-xl bg-gradient-to-b from-[#2a1714] to-[#1e100d] border border-[#e2a89b]/25 px-8 py-10 md:py-14 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative overflow-hidden backdrop-blur-md">
+        
+        <!-- Notebook Header Bar -->
+        <div class="absolute top-0 left-0 right-0 h-4 bg-gradient-to-r from-[#dfb15b]/20 via-[#e2a89b]/30 to-[#dfb15b]/20 flex justify-around items-center px-6">
+          <div class="w-2.5 h-2.5 rounded-full bg-black/40"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-black/40"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-black/40"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-black/40"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-black/40"></div>
+        </div>
+
+        <!-- Scrapbook paper binder circles -->
+        <div class="absolute top-4 left-6 flex flex-col gap-2 opacity-50">
+          <div class="w-2 h-2 rounded-full bg-amber-500/20"></div>
+          <div class="w-2 h-2 rounded-full bg-amber-500/20"></div>
+        </div>
+
+        <!-- Dialogue Text Sequence -->
+        <div class="space-y-6 md:space-y-8 z-10 relative">
+          
+          <!-- Speech bubble 1 (Koala) -->
+          <div class="flex items-start gap-3 justify-center md:justify-start">
+            <div class="w-10 h-10 rounded-full bg-[#9d8f9c]/20 border border-[#9d8f9c]/40 flex items-center justify-center text-lg shadow-sm shrink-0">🐨</div>
+            <div class="bg-[#2c1b18] border border-[#e2a89b]/15 px-5 py-3 rounded-2xl rounded-tl-none text-left max-w-xs md:max-w-md">
+              <p class="text-lg md:text-xl font-medium text-[#fdfbf7] leading-relaxed">Hey birthday fox...</p>
+            </div>
+          </div>
+
+          <!-- Speech bubble 2 (Koala continues) -->
+          <div class="flex items-start gap-3 justify-center md:justify-start transition-opacity duration-1000">
+            <div class="w-10 h-10 rounded-full bg-[#9d8f9c]/20 border border-[#9d8f9c]/40 flex items-center justify-center text-lg shadow-sm shrink-0 opacity-0 md:opacity-100">🐨</div>
+            <div class="bg-[#2c1b18] border border-[#e2a89b]/15 px-5 py-3 rounded-2xl rounded-tl-none text-left max-w-xs md:max-w-md">
+              <p class="text-lg md:text-xl text-[#fdfbf7] leading-relaxed">Your koala made something special for you. Wanna see it?</p>
+            </div>
+          </div>
+
+          <!-- Interaction Space: The Button Dock -->
+          <div class="pt-8 flex flex-col items-center justify-center">
+            <!-- We wrap the buttons in a relative box with specific height so the absolute "No" can jump around and never exit bounds -->
+            <div id="dialogue-button-container" class="relative w-full h-40 flex items-center justify-center gap-6 border border-dashed border-[#e2a89b]/10 rounded-xl bg-black/10 px-4">
+              
+              <!-- YES BUTTON (Safe and glowing) -->
+              <button onclick="handleYesClick()" class="z-20 px-10 py-3 bg-gradient-to-r from-[#e2a89b] to-[#eaaf9b] hover:from-[#eaaf9b] hover:to-[#f3c6af] text-[#160d0c] font-semibold tracking-wider rounded-full shadow-[0_4px_15px_rgba(226,168,155,0.4)] hover:shadow-[0_4px_25px_rgba(226,168,155,0.6)] transform hover:scale-105 transition-all duration-300">
+                Yes! 🦊
+              </button>
+
+              <!-- NO BUTTON (Slippery, plays hard to get) -->
+              <button id="no-btn" class="px-8 py-3 bg-[#241513] hover:bg-[#341d1a] text-[#e2a89b]/70 border border-[#e2a89b]/25 rounded-full transition-all duration-300 focus:outline-none select-none">
+                No
+              </button>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SCREEN 3: ROMANTIC REVEAL (Letter effect)  -->
+    <!-- ========================================== -->
+    <section id="screen-reveal" class="screen-fade flex flex-col items-center justify-center">
+      <div class="w-full max-w-2xl px-6 py-10 md:py-16 text-center space-y-12">
+        
+        <!-- Beautiful falling floating leaf outline -->
+        <div class="mx-auto w-12 h-12 text-[#dfb15b] opacity-40">
+          <svg class="w-full h-full animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M12 2C12 2 15 7 15 12C15 17 12 22 12 22C12 22 9 17 9 12C9 7 12 2 12 2Z"/>
+            <path d="M12 2V22"/>
+            <path d="M12 9C10.5 10 10.5 11 10.5 11"/>
+            <path d="M12 14C13.5 15 13.5 16 13.5 16"/>
+          </svg>
+        </div>
+
+        <!-- The slow-revealing paragraphs. Controlled by JS on transitions -->
+        <div class="space-y-6 md:space-y-8 font-serif-title tracking-wide text-lg md:text-xl text-[#fdfbf7] leading-relaxed">
+          <p class="reveal-line opacity-0 transform translate-y-4 transition-all duration-[1500ms] text-[#fdfbf7]/80">
+            so...
+          </p>
+          <p class="reveal-line opacity-0 transform translate-y-4 transition-all duration-[1500ms] text-[#fdfbf7]/80">
+            I wanted to make you something.
+          </p>
+          <p class="reveal-line opacity-0 transform translate-y-4 transition-all duration-[1500ms] text-[#fdfbf7]/90 font-light">
+            something small, but very <span class="font-handwritten text-2xl text-[#ffebc2] font-semibold">you</span>.
+          </p>
+          <p class="reveal-line opacity-0 transform translate-y-4 transition-all duration-[1500ms] text-[#fdfbf7]/80">
+            something a little chaotic, yet perfectly soft.
+          </p>
+          <p class="reveal-line opacity-0 transform translate-y-4 transition-all duration-[1500ms] text-[#dfb15b] italic font-handwritten text-3xl">
+            ...just like our little world.
+          </p>
+          <p class="reveal-line opacity-0 transform translate-y-4 transition-all duration-[1500ms] text-[#ffebc2] text-2xl md:text-3xl font-normal pt-4">
+            so I turned you into a puzzle.
+          </p>
+          <p class="reveal-line opacity-0 transform translate-y-4 transition-all duration-[1500ms] text-[#e2a89b]/90 text-sm tracking-widest uppercase">
+            A Strands game inspired entirely by us.
+          </p>
+        </div>
+
+        <!-- Transition Button to the Card (fades in last) -->
+        <div id="proceed-button-container" class="opacity-0 transition-opacity duration-[2000ms] pt-8">
+          <button onclick="transitionTo('screen-gift')" class="px-8 py-3.5 bg-gradient-to-r from-[#2a1714] to-[#3a201b] hover:from-[#3a201b] hover:to-[#4a2b25] text-[#ffebc2] border border-[#dfb15b]/35 rounded-full shadow-lg text-sm uppercase tracking-widest hover:shadow-[0_0_20px_rgba(223,177,91,0.2)] transition-all duration-300">
+            open your gift 🎁
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SCREEN 4: THE GIFT CARD (Glow Polaroid)   -->
+    <!-- ========================================== -->
+    <section id="screen-gift" class="screen-fade flex flex-col items-center justify-center">
+      
+      <!-- Hanging fairy lights visual directly above card -->
+      <div class="w-full max-w-md mx-auto h-12 flex justify-around opacity-75">
+        <div class="w-[1px] h-6 bg-[#dfb15b]/40 relative">
+          <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-yellow-200 blur-[2px] animate-pulse"></div>
+        </div>
+        <div class="w-[1px] h-10 bg-[#dfb15b]/40 relative">
+          <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-yellow-100 blur-[3px] animate-[pulse_3s_infinite]"></div>
+        </div>
+        <div class="w-[1px] h-4 bg-[#dfb15b]/40 relative">
+          <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-yellow-200 blur-[2px] animate-[pulse_2s_infinite]"></div>
+        </div>
+      </div>
+
+      <!-- The Grand Climax: Beautiful Taped Polaroid Gift Card -->
+      <div class="relative w-full max-w-sm md:max-w-md mx-auto p-4 z-20">
+        
+        <!-- Large Washi Tape on top -->
+        <div class="washi-tape" style="width: 140px; height: 32px; top: -16px; transform: translateX(-50%) rotate(-1deg); background: rgba(223, 177, 91, 0.45);"></div>
+
+        <!-- Card container with subtle hand-made scrapbook drop shadows -->
+        <div class="bg-[#fcfaf5] p-6 pb-10 rounded-sm shadow-[0_25px_60px_rgba(0,0,0,0.65)] text-[#4e3629] transform -rotate-1 hover:rotate-0 transition-transform duration-700 ease-out border border-[#dfb15b]/20">
+          
+          <!-- Image area: Redesigned warm hand-sketched romantic puzzle cover -->
+          <div class="relative w-full h-64 md:h-72 bg-[#ebe1cf] rounded-sm overflow-hidden flex flex-col items-center justify-center border border-black/5">
+            <!-- Background grid imitating paper texture -->
+            <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#4e3629 1px, transparent 1px); background-size: 16px 16px;"></div>
+            
+            <!-- Beautiful new cozy vector artwork of connection & puzzle elements -->
+            <svg class="w-48 h-48 relative z-10" viewBox="0 0 200 200" fill="none">
+              <!-- Giant custom hand-drawn heart frame -->
+              <path d="M100,55 C80,15 25,25 25,75 C25,125 100,165 100,165 C100,165 175,125 175,75 C175,25 120,15 100,55 Z" fill="#e2a89b" fill-opacity="0.12" stroke="#e2a89b" stroke-width="1.8" stroke-dasharray="4 3" />
+              
+              <!-- Clean minimal connecting thread path -->
+              <path d="M 45,140 Q 100,110 155,140" stroke="#4e3629" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.65"/>
+
+              <!-- Cozy golden puzzle piece nesting inside the heart -->
+              <g transform="translate(78, 62)">
+                <path d="M10,15 H25 A5,5 0 0,0 35,15 H40 V25 A5,5 0 0,1 40,35 V40 H30 A5,5 0 0,0 20,40 H10 V30 A5,5 0 0,1 10,20 Z" fill="#dfb15b" fill-opacity="0.25" stroke="#4e3629" stroke-width="1.5"/>
+              </g>
+
+              <!-- Cute sleeping koala head sketch on left -->
+              <g transform="translate(28, 120) scale(0.7)">
+                <circle cx="15" cy="15" r="12" fill="#d9cbd8" stroke="#4e3629" stroke-width="1.5"/>
+                <circle cx="2" cy="5" r="5" fill="#d9cbd8" stroke="#4e3629" stroke-width="1.5"/>
+                <circle cx="28" cy="5" r="5" fill="#d9cbd8" stroke="#4e3629" stroke-width="1.5"/>
+                <circle cx="2" cy="5" r="2.5" fill="#f5ede0"/>
+                <circle cx="28" cy="5" r="2.5" fill="#f5ede0"/>
+                <ellipse cx="15" cy="17" rx="3" ry="5" fill="#2c1a18"/>
+                <path d="M 8,13 Q 11,15 13,13" stroke="#4e3629" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                <path d="M 17,13 Q 19,15 22,13" stroke="#4e3629" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                <ellipse cx="6" cy="18" rx="2" ry="1" fill="#e2a89b" opacity="0.7"/>
+                <ellipse cx="24" cy="18" rx="2" ry="1" fill="#e2a89b" opacity="0.7"/>
+              </g>
+              
+              <!-- Cute sleeping fox head sketch on right -->
+              <g transform="translate(136, 120) scale(0.7)">
+                <polygon points="5,20 35,20 20,35" fill="#f3c6af" stroke="#4e3629" stroke-width="1.5"/>
+                <polygon points="5,20 1,5 15,15" fill="#f3c6af" stroke="#4e3629" stroke-width="1.5"/>
+                <polygon points="35,20 39,5 25,15" fill="#f3c6af" stroke="#4e3629" stroke-width="1.5"/>
+                <polygon points="9,16 5,8 14,14" fill="#e2a89b"/>
+                <polygon points="31,16 35,8 26,14" fill="#e2a89b"/>
+                <circle cx="20" cy="31" r="1.5" fill="#4e3629"/>
+                <path d="M 10,24 Q 13,22 15,25" stroke="#4e3629" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                <path d="M 25,24 Q 27,22 30,25" stroke="#4e3629" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                <ellipse cx="7" cy="27" rx="2" ry="1" fill="#e2a89b" opacity="0.8"/>
+                <ellipse cx="33" cy="27" rx="2" ry="1" fill="#e2a89b" opacity="0.8"/>
+              </g>
+
+              <!-- Warm sparkling firefly details -->
+              <g fill="#dfb15b" opacity="0.85">
+                <path d="M100,28 L102,32 L106,33 L102,34 L100,38 L98,34 L94,33 L98,32 Z"/>
+                <circle cx="145" cy="50" r="2.5" filter="drop-shadow(0 0 2px #dfb15b)"/>
+                <circle cx="55" cy="60" r="1.5"/>
+                <circle cx="100" cy="110" r="2" filter="drop-shadow(0 0 2px #dfb15b)"/>
+              </g>
+            </svg>
+
+            <!-- Overlay subtle dust glow -->
+            <div class="absolute inset-0 bg-gradient-to-t from-[#ebe1cf] via-transparent to-transparent"></div>
+          </div>
+
+          <!-- Note/Message -->
+          <div class="mt-6 text-center space-y-4">
+            <h3 class="font-serif-title text-2xl font-semibold tracking-wide text-[#331e17]">
+              A puzzle called Manishika
+            </h3>
+            <p class="font-handwritten text-[#e2a89b] text-xl font-medium pb-4">
+              Every word belongs to us and our memories
+            </p>
+
+            <!-- Direct Game Launch Button -->
+            <a href="https://strandstudio.thegoodboi.net/play/?id=4VTM41" target="_blank" rel="noopener noreferrer" class="group relative inline-flex items-center justify-center w-full py-4 bg-gradient-to-r from-[#4e3629] to-[#2c1a12] hover:from-[#e2a89b] hover:to-[#dfb15b] hover:text-[#160d0c] text-[#fdfbf7] font-semibold tracking-widest text-sm uppercase rounded-sm shadow-md transition-all duration-500 overflow-hidden">
+              <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_2.5s_infinite]"></span>
+              <span class="relative flex items-center gap-2">
+                PLAY
+                <svg class="w-4 h-4 fill-current group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24">
+                  <path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42L16.86 11H5v2z"/>
+                </svg>
+              </span>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Sweet little polaroid shadow paper tag sticking out from behind -->
+        <div class="absolute bottom-[-15px] left-[15%] right-[15%] h-8 bg-amber-900/10 blur-md rounded-lg -z-10"></div>
+      </div>
+
+      <!-- Footer back note -->
+      <p class="mt-8 font-handwritten text-lg text-[#e2a89b]/80 max-w-sm text-center px-4">
+        "I hope this brings a soft smile to your beautiful face today. Happy birthday, my favorite notification." 💌
+      </p>
+    </section>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- SCATTERED DETAILS (TUCKED SIDES / HOVERS)  -->
+  <!-- ========================================== -->
+
+  <!-- Top-Right Taped Envelope Tag (Interactive Hidden message) -->
+  <div class="fixed top-8 right-8 z-40 hidden md:block">
+    <div class="relative hidden-tag cursor-help group">
+      <!-- Envelope Icon / Mini drawing -->
+      <div class="w-12 h-12 rounded-full bg-[#2a1714]/80 border border-[#e2a89b]/30 flex items-center justify-center shadow-lg hover:border-[#dfb15b] transition-all">
+        <span class="text-lg">💌</span>
+      </div>
+      <!-- Hover Card -->
+      <div class="tag-content opacity-0 scale-95 translate-y-2 absolute right-0 mt-3 w-56 p-4 bg-[#fcfaf5] border border-[#e2a89b]/30 rounded-lg shadow-2xl text-[#4e3629] font-handwritten text-lg transition-all duration-300 pointer-events-none origin-top-right">
+        <div class="absolute -top-1.5 right-5 w-3 h-3 bg-[#fcfaf5] rotate-45 border-t border-l border-[#e2a89b]/30"></div>
+        <p class="text-[#e2a89b] font-bold text-sm uppercase tracking-widest font-sans mb-1">note 1:</p>
+        "time moves unfairly fast when I’m with you."
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom-Left Daisy / Clover Soft Sticker -->
+  <div class="fixed bottom-8 left-8 z-40 hidden md:block">
+    <div class="relative hidden-tag cursor-help group">
+      <!-- Mini Daisy Flower SVG Sketch -->
+      <div class="w-10 h-10 rounded-full bg-[#1e100d]/60 border border-dashed border-[#e2a89b]/20 flex items-center justify-center shadow-md hover:scale-110 transition-transform">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#dfb15b" stroke-width="1.2">
+          <circle cx="12" cy="12" r="2.5" fill="#dfb15b"/>
+          <path d="M12,9.5 C12,7 10,7 10,9.5 C10,12 12,12 12,12"/>
+          <path d="M12,14.5 C12,17 14,17 14,14.5 C14,12 12,12 12,12"/>
+          <path d="M9.5,12 C7,12 7,10 9.5,10 C12,10 12,12 12,12"/>
+          <path d="M14.5,12 C17,12 17,14 14.5,14 C12,14 12,12 12,12"/>
+        </svg>
+      </div>
+      <!-- Hover Card -->
+      <div class="tag-content opacity-0 scale-95 translate-y-2 absolute left-0 bottom-12 w-52 p-4 bg-[#fcfaf5] border border-[#e2a89b]/30 rounded-lg shadow-2xl text-[#4e3629] font-handwritten text-lg transition-all duration-300 pointer-events-none origin-bottom-left">
+        <div class="absolute -bottom-1.5 left-4.5 w-3 h-3 bg-[#fcfaf5] rotate-45 border-b border-r border-[#e2a89b]/30"></div>
+        <p class="text-[#dfb15b] font-bold text-sm uppercase tracking-widest font-sans mb-1">note 2:</p>
+        "you make life feel softer, warmer, and so much more magical."
+      </div>
+    </div>
+  </div>
+
+  <!-- Smooth Background Shimmer Keyframes -->
+  <style>
+    @keyframes shimmer {
+      100% { transform: translateX(100%); }
+    }
+  </style>
+
+  <!-- SCRIPTS & INTERACTION LOGIC -->
+  <script>
+    // State management for transitions
+    function transitionTo(screenId) {
+      // Fade out active screen
+      const currentActive = document.querySelector('.screen-fade.active');
+      if (currentActive) {
+        currentActive.classList.remove('active');
+      }
+
+      // Smooth trigger to next screen
+      const nextScreen = document.getElementById(screenId);
+      if (nextScreen) {
+        // Simple delay to coordinate with fade
+        setTimeout(() => {
+          nextScreen.classList.add('active');
+          
+          // Trigger special logic based on screen
+          if (screenId === 'screen-reveal') {
+            startLetterReveal();
+          }
+        }, 300);
+      }
+    }
+
+    // Playful "No" Button escape logic
+    const noBtn = document.getElementById('no-btn');
+    const container = document.getElementById('dialogue-button-container');
+    const noBtnTexts = [
+      "wrong answer 🐨",
+      "be serious 🦊",
+      "the fox says yes",
+      "nice try",
+      "try again!",
+      "koala says no to 'no'"
+    ];
+    let noTextIndex = 0;
+
+    function moveNoButton(e) {
+      const containerRect = container.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+
+      // Ensure button moves smoothly within its container boundary
+      const padding = 12;
+      const maxX = containerRect.width - btnRect.width - padding;
+      const maxY = containerRect.height - btnRect.height - padding;
+
+      let randomX = Math.random() * maxX;
+      let randomY = Math.random() * maxY;
+
+      // Avoid jumping directly onto user cursor coordinate
+      if (e) {
+        const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+        const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+        if (clientX && clientY) {
+          const cursorRelativeX = clientX - containerRect.left;
+          const cursorRelativeY = clientY - containerRect.top;
+
+          // Adjust X/Y if too close to target cursor coordinates
+          if (Math.abs(randomX - cursorRelativeX) < 80) {
+            randomX = (randomX + 120) % maxX;
+          }
+          if (Math.abs(randomY - cursorRelativeY) < 50) {
+            randomY = (randomY + 80) % maxY;
+          }
+        }
+      }
+
+      // Apply coordinates in absolute relative layout
+      noBtn.style.position = 'absolute';
+      noBtn.style.left = `${Math.max(padding, randomX)}px`;
+      noBtn.style.top = `${Math.max(padding, randomY)}px`;
+
+      // Cycle humorous warning phrases
+      noBtn.innerText = noBtnTexts[noTextIndex];
+      noTextIndex = (noTextIndex + 1) % noBtnTexts.length;
+    }
+
+    noBtn.addEventListener('mouseenter', moveNoButton);
+    noBtn.addEventListener('touchstart', function(e) {
+      e.preventDefault(); // Prevents accidental click
+      moveNoButton(e);
+    });
+
+    // Handle "Yes" Button click sequence
+    function handleYesClick() {
+      // Transition with a lovely cinematic screen fade
+      transitionTo('screen-reveal');
+    }
+
+    // Letter reveal typewriter delay engine
+    function startLetterReveal() {
+      const lines = document.querySelectorAll('.reveal-line');
+      const proceedContainer = document.getElementById('proceed-button-container');
+      
+      lines.forEach((line, index) => {
+        setTimeout(() => {
+          line.classList.remove('opacity-0', 'translate-y-4');
+          line.classList.add('opacity-100', 'translate-y-0');
+        }, index * 1800); // Cinematic slow pacing
+      });
+
+      // Show the button to unlock the final polaroid once letters finish displaying
+      setTimeout(() => {
+        proceedContainer.classList.remove('opacity-0');
+        proceedContainer.classList.add('opacity-100');
+      }, lines.length * 1800 + 400);
+    }
+
+
+    // ===================================================
+    //  FIREFLIES & MAGIC PARTICLES ENGINE (CANVAS)
+    // ===================================================
+    const canvas = document.getElementById('fireflies-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let particles = [];
+    const maxParticles = 65;
+
+    // Resize tracking
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initParticles();
+    }
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height + canvas.height; // Spawn slightly below screen view or all around
+        if (particles.length < maxParticles / 2) {
+          // Initial spread all over screen
+          this.y = Math.random() * canvas.height;
+        }
+        this.size = Math.random() * 2.8 + 0.6;
+        this.speedX = Math.random() * 0.4 - 0.2;
+        this.speedY = -(Math.random() * 0.5 + 0.2); // Slow rise upward
+        this.alpha = Math.random() * 0.5 + 0.1;
+        this.fadeSpeed = Math.random() * 0.005 + 0.002;
+        this.glowColor = Math.random() > 0.4 ? 'rgba(255, 235, 194, ' : 'rgba(226, 168, 155, '; // Warm gold or dusty peach glows
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        // Gentle sinewave weave behavior
+        this.speedX += Math.sin(this.y / 30) * 0.01;
+
+        // Soft fade in & fade out near top
+        if (this.y < 0 || this.x < 0 || this.x > canvas.width) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        ctx.save();
+        ctx.shadowBlur = this.size * 3;
+        ctx.shadowColor = this.glowColor + '0.8)';
+        ctx.fillStyle = this.glowColor + this.alpha + ')';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      for (let i = 0; i < maxParticles; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Paint subtle background radial twilight lighting over original color palette
+      const gradient = ctx.createRadialGradient(
+        canvas.width / 2, canvas.height / 2, 10,
+        canvas.width / 2, canvas.height / 2, Math.max(canvas.width, canvas.height)
+      );
+      gradient.addColorStop(0, 'rgba(35, 21, 19, 0.4)');
+      gradient.addColorStop(1, 'rgba(22, 13, 12, 0.1)');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+      }
+      requestAnimationFrame(animateParticles);
+    }
+
+    // Interactivity: Make particles drift away gently from cursor/finger position
+    window.addEventListener('mousemove', (e) => {
+      particles.forEach(p => {
+        const dx = p.x - e.clientX;
+        const dy = p.y - e.clientY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          // Push away force
+          const force = (120 - dist) / 120;
+          p.x += (dx / dist) * force * 4;
+          p.y += (dy / dist) * force * 4;
+        }
+      });
+    });
+
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches && e.touches[0]) {
+        const touch = e.touches[0];
+        particles.forEach(p => {
+          const dx = p.x - touch.clientX;
+          const dy = p.y - touch.clientY;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            const force = (100 - dist) / 100;
+            p.x += (dx / dist) * force * 4;
+            p.y += (dy / dist) * force * 4;
+          }
+        });
+      }
+    });
+
+    // Window load triggers
+    window.onload = function() {
+      resizeCanvas();
+      animateParticles();
+    };
+
+    window.addEventListener('resize', resizeCanvas);
+  </script>
+</body>
+</html>
